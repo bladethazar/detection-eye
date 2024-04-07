@@ -81,7 +81,7 @@ class DetectionEye:
             return jsonify({'error': 'Internal Server Error'}), 500
 
 
-@detection_eye_bp.route('/video-stream', methods=['GET'])
+@detection_eye_bp.route('/video_stream', methods=['GET'])
 def video_stream():
     detection_eye = DetectionEye()
     try:
@@ -91,9 +91,9 @@ def video_stream():
             # Wait for the result (response) of the detect_motion function
             result = future.result()
         return result
+    # TODO: Adjustment for the except-clause necessary to display the image if the video-stream is not available
     except IOError as e:
         return send_from_directory(detection_eye_bp.static_folder, 'favicon.ico', mimetype='image/vnd.microsoft.icon')
-        # return jsonify({"error": f"Failed to get camera video-stream. Error: {e}"}), 500
 
 
 @detection_eye_bp.route('/send_camera_shot', methods=['POST'])
