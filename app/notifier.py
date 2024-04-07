@@ -4,6 +4,8 @@ import time
 import requests
 import logging
 
+from flask import jsonify
+
 logging.basicConfig(level=logging.INFO, stream=sys.stdout,
                     format='[%(asctime)s.%(msecs)03d][%(levelname)s]: %(message)s',
                     datefmt='%Y-%m-%d %H:%M:%S')
@@ -15,10 +17,9 @@ class Notifier:
     def __init__(self):
         self.telegram_notifier_url = os.getenv('TELEGRAM_NOTIFIER_URL') if os.getenv('TELEGRAM_NOTIFIER_URL') else 'http://localhost:5000'
 
-    def send_telegram_message(self, message, image=None):
+    def send_telegram_notification(self, message="", image=None):
         try:
             telegram_notifier_url = self.telegram_notifier_url
-
             if image is not None:
                 params = {'caption': message}
                 image_file = {'photo': ('image.jpg', image, 'image/jpeg')}

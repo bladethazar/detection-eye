@@ -7,7 +7,8 @@ class MetricsCollector:
         self.motion_events_detected = Counter('motion_events_detected_total', 'Total number of motion events detected')
         self.error_count = Counter('error_count_total', 'Total number of errors encountered')
         self.camera_fps = Gauge('camera_fps', 'Frames per second (FPS) of the camera stream')
-        self.frame_drop_rate = Gauge('frame_drop_rate_percentage', 'Percentage of frames that are dropped or skipped during processing')
+        self.frame_drop_rate = Gauge('frame_drop_rate_percentage',
+                                     'Percentage of frames that are dropped or skipped during processing')
         self.network_bandwidth_usage = Gauge('network_bandwidth_usage_bytes', 'Network bandwidth usage in bytes')
         self.response_time = Gauge('response_time_seconds', 'Response time of the application endpoints')
         self.concurrency_level = Gauge('concurrency_level', 'Number of concurrent requests or processing tasks')
@@ -35,3 +36,6 @@ class MetricsCollector:
 
     def set_concurrency_level(self, level):
         self.concurrency_level.set(level)
+
+
+metrics_collector = MetricsCollector()
